@@ -1,4 +1,4 @@
-package calc;
+package calc.view;
 
 import java.awt.Color;
 import java.awt.Font;

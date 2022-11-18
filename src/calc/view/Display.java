@@ -1,4 +1,4 @@
-package calc;
+package calc.view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -7,13 +7,18 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import calc.model.Memoria;
+import calc.model.MemoriaObserver;
+
 @SuppressWarnings("serial")
-public class Display extends JPanel{
+public class Display extends JPanel implements MemoriaObserver{
 	
 	private final JLabel label; 
 	
 	public Display() {
-		label = new JLabel("1234,56");
+		Memoria.getInstancia().adicionarObserver(this);
+		
+		label = new JLabel(Memoria.getInstancia().getTextoAtual());
 		setBackground(new Color(46,49,50));
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("courier", Font.PLAIN, 30));
@@ -22,6 +27,11 @@ public class Display extends JPanel{
 		
 		add(label);
 	
+	}
+
+	@Override
+	public void valorAlterado(String novoValor) {
+		label.setText(novoValor);
 	}
 	
 	
